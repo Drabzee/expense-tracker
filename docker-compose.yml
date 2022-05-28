@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - node_modules:/app/node_modules
+      - .:/app
+    ports:
+      - 5500:5500
+    environment:
+      PORT: 5500
+      WATCHPACK_POLLING: 'true'
+
+volumes:
+  node_modules:
