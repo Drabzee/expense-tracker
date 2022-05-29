@@ -1,13 +1,30 @@
 @import 'styles/CommonVariables.module.scss';
 
 .expenseTile {
-    display: flex;
-    background-color: white;
-    justify-content: space-between;
     box-shadow: $box-shadow;
+    display: flex;
+    align-items: stretch;
     margin: 10px 0;
-    padding: 10px;
+
+    > span {
+        color: white;
+        background-color: $danger-color;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+    }
 
     &.positive { border-right: 5px solid $success-color; }
     &.negative { border-right: 5px solid $danger-color; }
+
+    .content {
+        display: flex;
+        background-color: white;
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px;
+    }
 }
