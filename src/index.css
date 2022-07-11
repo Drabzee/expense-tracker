@@ -9,3 +9,12 @@ body {
   background-color: #f7f7f7;
   font-family: 'Lato', sans-serif;
 }
+
+.MuiCalendarPicker-viewTransitionContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+.MuiCalendarPicker-viewTransitionContainer::-webkit-scrollbar-thumb {
+  background-color: #7862E4;
+  border-radius: 999px;
+}

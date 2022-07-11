@@ -1,13 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: { main: '#7862E4' },
+    secondary: { main: '#ff0000' },
+    disabled: { main: '#eee' },
+    text: {
+      primary: '#111111',
+      secondary: '#999999',
+      disabled: '#dddddd'
+    },
+    background: {
+      default: '#f7f7f7',
+      paper: '#f7f7f7'
+    },
+    components: {
+      MuiCalendarPicker: {
+        styleOverrides: {
+          viewTransitionContainer: {
+            '&::-webkit-scrollbar': {
+              width: '50px'
+            }
+          }
+        }
+      }
+    }
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={darkTheme}>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <App />
+      </LocalizationProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
