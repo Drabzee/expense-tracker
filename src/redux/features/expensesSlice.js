@@ -4,10 +4,10 @@ const expenseSlice = createSlice({
     name: 'expenses',
     initialState: [],
     reducers: {
-        add: (state, payload) => {
+        add: (state, { payload }) => {
             state.push(payload);
         },
-        remove: (state, payload) => {
+        remove: (state, { payload }) => {
             state = state.filter(item => item.id !== payload)
         }
     }

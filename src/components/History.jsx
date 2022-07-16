@@ -3,6 +3,7 @@ import ExpenseTile from 'components/ExpenseTile';
 import { useSelector } from 'react-redux';
 
 const History = () => {
+  
   const expenses = useSelector(state => state.expenses);
 
   return (

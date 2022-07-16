@@ -3,9 +3,8 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import moment from 'moment';
 import style from 'styles/InputFormField.module.scss';
 
-const DateFormField = ({label, id}) => {
-  
-  const [ date, setDate ] = useState(moment());
+const DateFormField = ({date, setDate, label, id}) => {
+
   const [ isDatePickerOpen, setIsDatePickerOpen ] = useState(false);
 
   const onClickHandler = () => {
