@@ -1,3 +1,5 @@
+@import url('http://fonts.cdnfonts.com/css/tangerine?styles=799');
+
 .container {
     width: 100%;
     margin-top: 20px;
@@ -10,11 +12,10 @@
     .emptyCaption {
         display: block;
         color: #a7a7a7;
-        font-style: italic;
         font-size: 18px;
         text-align: center;
         margin-top: 10px;
-        font-family: 'Gabriola';
+        font-family: 'Tangerine';
         letter-spacing: .5px;
     }
 }
