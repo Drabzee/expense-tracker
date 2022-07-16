@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import style from 'styles/TransactionForm.module.scss';
 import InputFormField from 'components/InputFormField';
-import DateFormField from './DateFormField';
+import DateFormField from 'components/DateFormField';
+import { add as addExpense } from 'redux/features/expensesSlice';
 
 const TransactionForm = () => {
 
@@ -13,15 +14,12 @@ const TransactionForm = () => {
   const dispatch = useDispatch();
 
   const onFormSubmitHandler = () => {
-    dispatch({
-      type: 'expenses/add',
-      payload: {
-        id: Date.now(),
-        title,
-        amount: +amount,
-        date: date.toString()
-      }
-    });
+    dispatch(addExpense({
+      id: Date.now(),
+      title,
+      amount: +amount,
+      date: date.toString()
+    }));
     setTitle('');
     setAmount(0);
     setDate(moment());

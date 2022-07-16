@@ -3,7 +3,7 @@ import ExpenseTile from 'components/ExpenseTile';
 import { useSelector } from 'react-redux';
 
 const History = () => {
-  
+
   const expenses = useSelector(state => state.expenses);
 
   return (
@@ -12,6 +12,7 @@ const History = () => {
         { expenses.length ? expenses.map(expense => (    
             <ExpenseTile
               key={expense.id}
+              id={expense.id}
               title={expense.title}
               amount={expense.amount} />
         )) : <span className={style.emptyCaption}>No expense spared today!</span> }
