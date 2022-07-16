@@ -8,7 +8,7 @@ const History = () => {
 
   return (
     <div className={style.container}>
-        <h3>History</h3>
+        <h3>Today's History</h3>
         { expenses.length ? expenses.map(expense => (    
             <ExpenseTile
               key={expense.id}
