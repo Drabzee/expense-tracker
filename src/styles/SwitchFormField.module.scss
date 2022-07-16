@@ -1,0 +1,49 @@
+.switchFormField {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        margin: 10px 0 8px;
+        font-weight: bold;
+        letter-spacing: .6px;
+        font-size: 14px;
+        white-space: pre-wrap;
+    }
+
+    .switch {
+        display: flex;
+        width: 100%;
+        cursor: pointer;
+        letter-spacing: .6px;
+        font-size: 14px;
+        white-space: pre-wrap;
+        color: #999999;
+        text-transform: capitalize;
+
+        .switchCase {
+            flex: 1;
+            border: 2px solid #999999;
+            padding: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.active {
+                background-color: #ece8ff;
+                border-color: #7862E4;
+                color: #7862E4;
+                font-weight: bold;
+            }
+        }
+
+        .switchCase:nth-of-type(1) {
+            border-right: 1px solid #7862E4;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .switchCase:nth-of-type(2) {
+            border-left: 1px solid #7862E4;
+            border-radius: 0 2px 2px 0;
+        }
+    }
+}

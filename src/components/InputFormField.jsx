@@ -16,6 +16,7 @@ const InputFormField = ({ type, label, id, placeholder, value, setValue }) => {
           type={type}
           name={id}
           id={id}
+          min={0}
           placeholder={placeholder} />
     </div>
   )

@@ -14,7 +14,8 @@ const History = () => {
               key={expense.id}
               id={expense.id}
               title={expense.title}
-              amount={expense.amount} />
+              amount={expense.amount}
+              type={expense.type} />
         )) : <span className={style.emptyCaption}>No expense spared today!</span> }
     </div>
   )

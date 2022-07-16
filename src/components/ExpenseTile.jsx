@@ -3,7 +3,7 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 import style from 'styles/ExpenseTile.module.scss';
 import { remove as removeExpense } from 'redux/features/expensesSlice';
 
-const ExpenseTile = ({id, title, amount}) => {
+const ExpenseTile = ({ id, title, amount, type }) => {
 
   const dispatch = useDispatch();
 
@@ -19,12 +19,12 @@ const ExpenseTile = ({id, title, amount}) => {
   return (
     <div className={`
       ${style.expenseTile}
-      ${amount > 0 ? style.positive : style.negative}
+      ${type === 'income' ? style.positive : style.negative}
     `}>
       <span className={style.deleteCta} onClick={onDeleteHandler}><RiDeleteBin5Fill /></span>
       <div className={style.content}>
         <span className={style.title}>{ title }</span>
-        <span className={style.amount}>{`${amount > 0 ? '+' : ''}${formattedAmount}`}</span>
+        <span className={style.amount}>₹ {formattedAmount}</span>
       </div>
     </div>
   )
