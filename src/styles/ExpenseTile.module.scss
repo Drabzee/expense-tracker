@@ -6,7 +6,7 @@
     align-items: stretch;
     margin: 10px 0;
 
-    > span {
+    .deleteCta {
         color: white;
         background-color: $danger-color;
         width: 40px;
@@ -23,8 +23,16 @@
     .content {
         display: flex;
         background-color: white;
-        width: 100%;
+        width: calc(100% - 40px);
         justify-content: space-between;
         padding: 10px;
+
+        .title {
+            flex: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-right: 20px;
+        }
     }
 }

@@ -21,10 +21,10 @@ const ExpenseTile = ({id, title, amount}) => {
       ${style.expenseTile}
       ${amount > 0 ? style.positive : style.negative}
     `}>
-      <span onClick={onDeleteHandler}><RiDeleteBin5Fill /></span>
+      <span className={style.deleteCta} onClick={onDeleteHandler}><RiDeleteBin5Fill /></span>
       <div className={style.content}>
-        <span>{ title }</span>
-        <span>{`${amount > 0 ? '+' : ''}${formattedAmount}`}</span>
+        <span className={style.title}>{ title }</span>
+        <span className={style.amount}>{`${amount > 0 ? '+' : ''}${formattedAmount}`}</span>
       </div>
     </div>
   )
