@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import style from 'styles/Summary.module.scss';
+import { getCommaFormattedAmount } from 'utils';
 
 const SummaryContainer = () => {
 
@@ -10,7 +11,7 @@ const SummaryContainer = () => {
     return (
       <div className={style.content}>
         <h4>{ title }</h4>
-        <p>₹ { amount.toFixed(2) }</p>
+        <p>₹ { getCommaFormattedAmount(amount) }</p>
       </div>
     );
   }
@@ -18,7 +19,7 @@ const SummaryContainer = () => {
   return (
     <div className={style.container}>
       <h4>YOUR BALANCE</h4>
-      <h1>₹ {total.toFixed(2)}</h1>
+      <h1>₹ {getCommaFormattedAmount(total)}</h1>
       <div className={style.block}>
         { getSummaryBlockContent('INCOME', totalIncome) }
         { getSummaryBlockContent('EXPENSE', totalExpense) }

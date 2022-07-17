@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import style from 'styles/Modal.module.scss';
 
-const Modal = ({ children }) => {
+const Modal = ({ showModal, children }) => {
 
   const modalRef = useRef();
 
@@ -11,8 +11,13 @@ const Modal = ({ children }) => {
     }
   }, []);
 
+  const onClickHandler = e => {
+    if(e.target === modalRef.current)
+      showModal(false);
+  }
+
   return (
-    <div ref={modalRef} className={style.modal}>
+    <div ref={modalRef} className={style.modal} onClick={onClickHandler}>
       <div className={style.content}>
         {children}
       </div>

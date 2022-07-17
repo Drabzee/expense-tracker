@@ -1,7 +1,7 @@
-@import 'styles/CommonVariables.module.scss';
+@import 'CommonVariables.module.scss';
 
 .expenseTile {
-    box-shadow: $box-shadow;
+    box-shadow: 0px 5px 4px -2px rgb(0 0 0 / 12%);
     display: flex;
     align-items: stretch;
     margin: 10px 0;
@@ -26,6 +26,7 @@
         width: calc(100% - 40px);
         justify-content: space-between;
         padding: 10px;
+        cursor: pointer;
 
         .title {
             flex: 1;

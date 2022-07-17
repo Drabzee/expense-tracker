@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { createContext } from 'react';
 import Modal from 'components/Modal';
 
 const ModalContext = createContext({});
+
+export const useModal = () => useContext(ModalContext);
 
 const ModalContextComponent = ({ children }) => {
     const [ modalContent, setModalContent ] = useState(false);
@@ -18,7 +20,7 @@ const ModalContextComponent = ({ children }) => {
 
     return (
         <ModalContext.Provider value={showModal}>
-            { modalContent && <Modal>{modalContent}</Modal> }
+            { modalContent && <Modal showModal={showModal}>{modalContent}</Modal> }
             { children }
         </ModalContext.Provider>
     );
