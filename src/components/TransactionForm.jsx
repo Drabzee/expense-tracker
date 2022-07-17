@@ -9,10 +9,16 @@ import SwitchFormField from 'components/SwitchFormField';
 
 const TransactionForm = () => {
 
-  const [ title, setTitle ] = useState('');
-  const [ amount, setAmount ] = useState('');
+  const formInitialValues = {
+    title: '',
+    amount: '',
+    type: 'expense'
+  }
+
+  const [ title, setTitle ] = useState(formInitialValues.title);
+  const [ amount, setAmount ] = useState(formInitialValues.amount);
   const [ date, setDate ] = useState(moment());
-  const [ type, setType ] = useState('expense');
+  const [ type, setType ] = useState(formInitialValues.type);
   const dispatch = useDispatch();
 
   const onFormSubmitHandler = () => {
@@ -23,10 +29,10 @@ const TransactionForm = () => {
       amount: +amount,
       date: date.toString()
     }));
-    setTitle('');
-    setAmount(0);
+    setTitle(formInitialValues.title);
+    setAmount(formInitialValues.amount);
     setDate(moment());
-    setType('expense');
+    setType(formInitialValues.type);
   }
 
   return (

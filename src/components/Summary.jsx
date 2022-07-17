@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
 import style from 'styles/Summary.module.scss';
 
 const SummaryContainer = () => {
+
+  const { totalIncome, totalExpense } = useSelector(state => state.summary);
+  const total = totalIncome - totalExpense;
 
   const getSummaryBlockContent = (title, amount) => {
     return (
@@ -14,10 +18,10 @@ const SummaryContainer = () => {
   return (
     <div className={style.container}>
       <h4>YOUR BALANCE</h4>
-      <h1>₹ 0.00</h1>
+      <h1>₹ {total.toFixed(2)}</h1>
       <div className={style.block}>
-        { getSummaryBlockContent('INCOME', 0) }
-        { getSummaryBlockContent('EXPENSE', 0) }
+        { getSummaryBlockContent('INCOME', totalIncome) }
+        { getSummaryBlockContent('EXPENSE', totalExpense) }
       </div>
     </div>
   )

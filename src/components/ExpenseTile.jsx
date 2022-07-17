@@ -13,7 +13,7 @@ const ExpenseTile = ({ id, title, amount, type }) => {
   }).format(amount);
 
   const onDeleteHandler = () => {
-    dispatch(removeExpense(id));
+    dispatch(removeExpense({id, amount}));
   }
 
   return (

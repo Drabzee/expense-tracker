@@ -8,7 +8,7 @@ const expenseSlice = createSlice({
             state.push(payload);
         },
         remove: (state, { payload }) => {
-            return state.filter(item => item.id !== payload)
+            return state.filter(item => item.id !== payload.id)
         }
     }
 });
