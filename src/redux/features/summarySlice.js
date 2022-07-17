@@ -11,13 +11,13 @@ const summarySlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder.addCase(addExpense().type, (state, { payload }) => {
-            const { amount } = payload;
-            if (payload.type === 'income') state.totalIncome += amount;
+            const { amount, type } = payload;
+            if (type === 'income') state.totalIncome += amount;
             else state.totalExpense += amount;
         });
         builder.addCase(removeExpense().type, (state, { payload }) => {
-            const { amount } = payload;
-            if (payload.type === 'income') state.totalIncome -= amount;
+            const { amount, type } = payload;
+            if (type === 'income') state.totalIncome -= amount;
             else state.totalExpense -= amount;
         });
     }
