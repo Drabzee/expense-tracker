@@ -1,19 +1,20 @@
 import style from 'styles/SwitchFormField.module.scss';
 
-const SwitchFormField = ({ value, setValue }) => {
+const SwitchFormField = ({ label, switchcases, ...props }) => {
 
-  const switchCases = ['expense', 'income'];
+  const { field, form } = props;
+  const { name, value } = field;
+  const { setFieldValue } = form;
   
   const onClickHandler = e => {
-    setValue(e.target.id);
+    setFieldValue(name, e.target.id);
   }
-
 
   return (
     <div className={style.switchFormField}>
-      <span>Type</span>
+      <span>{ label }</span>
       <div className={style.switch} onClick={onClickHandler}>
-        { switchCases.map(switchCase => (
+        { switchcases.map(switchCase => (
           <div
             key={switchCase}
             id={switchCase}
@@ -26,4 +27,4 @@ const SwitchFormField = ({ value, setValue }) => {
   )
 }
 
-export default SwitchFormField
+export default SwitchFormField;

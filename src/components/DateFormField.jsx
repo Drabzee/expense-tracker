@@ -3,25 +3,26 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import moment from 'moment';
 import style from 'styles/InputFormField.module.scss';
 
-const DateFormField = ({date, setDate, label, id}) => {
+const DateFormField = ({ label, placeholder, ...props }) => {
 
   const [ isDatePickerOpen, setIsDatePickerOpen ] = useState(false);
 
-  const onClickHandler = () => {
-    setIsDatePickerOpen(true);
-  }
+  const { field, form } = props;
+  const { name, value: date } = field;
+  const { setFieldValue } = form;
 
   const getDatePickerUI = () => {
     return (
-      <div className={style.inputFormField} onClick={onClickHandler}>
-        <label htmlFor={id}>{label}</label>
+      <div className={style.inputFormField} onClick={() => setIsDatePickerOpen(true)}>
+        <label htmlFor={name}>{label}</label>
         <input
             type="text"
-            name={id}
-            id={id}
+            name={name}
+            id={name}
             disabled={true}
             readOnly={true}
-            value={date.format('Do MMM, YYYY')}
+            value={date ? date.format('Do MMM, YYYY') : ''}
+            placeholder={placeholder}
           />
       </div>
     )
@@ -35,12 +36,10 @@ const DateFormField = ({date, setDate, label, id}) => {
         showDaysOutsideCurrentMonth={true}
         open={isDatePickerOpen}
         showToolbar={false}
-        onChange={(newValue) => {
-          setDate(newValue);
-        }}
+        onChange={(newValue) => setFieldValue(name, newValue)}
         closeOnSelect={true}
         onClose={() => setIsDatePickerOpen(false)}
-        renderInput={ () => getDatePickerUI() }
+        renderInput={getDatePickerUI}
         views={['year', 'month', 'day']}
       />
   )

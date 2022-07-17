@@ -1,6 +1,5 @@
-import moment from 'moment';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { FastField, Form, Formik } from 'formik';
 import style from 'styles/TransactionForm.module.scss';
 import InputFormField from 'components/InputFormField';
 import DateFormField from 'components/DateFormField';
@@ -12,16 +11,13 @@ const TransactionForm = () => {
   const formInitialValues = {
     title: '',
     amount: '',
-    type: 'expense'
+    type: 'expense',
+    date: null
   }
 
-  const [ title, setTitle ] = useState(formInitialValues.title);
-  const [ amount, setAmount ] = useState(formInitialValues.amount);
-  const [ date, setDate ] = useState(moment());
-  const [ type, setType ] = useState(formInitialValues.type);
   const dispatch = useDispatch();
 
-  const onFormSubmitHandler = () => {
+  const onFormSubmitHandler = ({ title, type, amount, date }, { resetForm }) => {
     dispatch(addExpense({
       id: Date.now(),
       title,
@@ -29,38 +25,42 @@ const TransactionForm = () => {
       amount: +amount,
       date: date.toString()
     }));
-    setTitle(formInitialValues.title);
-    setAmount(formInitialValues.amount);
-    setDate(moment());
-    setType(formInitialValues.type);
+    
+    resetForm();
   }
+
+  // const onFormResetHandler = ()
 
   return (
     <div className={style.container}>
       <h3>Add new transaction</h3>
-      <InputFormField
-        type='text'
-        label='Title'
-        id='title'
-        value={title}
-        setValue={setTitle}
-        placeholder='Enter title...' />
-      <InputFormField
-        type='number'
-        label='Amount'
-        id='amount'
-        value={amount}
-        setValue={setAmount}
-        placeholder='Enter amount...' />
-      <SwitchFormField
-        value={type}
-        setValue={setType} />
-      <DateFormField
-        label="Date of transaction"
-        id='date'
-        date={date}
-        setDate={setDate} />
-      <button onClick={onFormSubmitHandler}>Add transaction</button>
+      <Formik initialValues={formInitialValues} onSubmit={onFormSubmitHandler}>
+        <Form>
+          <FastField
+            type='text'
+            name='title'
+            label='Title'
+            component={InputFormField}
+            placeholder='Enter title' />
+          <FastField
+            type='number'
+            name='amount'
+            label='Amount'
+            component={InputFormField}
+            placeholder='Enter amount' />
+          <FastField
+            name='type'
+            label='Type'
+            switchcases={['expense', 'income']}
+            component={SwitchFormField} />
+          <FastField
+            name='date'
+            label='Date of transaction'
+            component={DateFormField}
+            placeholder='Select date of transaction' />
+          <button type='submit'>Add transaction</button>
+        </Form>
+      </Formik>
     </div>
   )
 }
