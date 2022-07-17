@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import style from 'styles/InputFormField.module.scss';
 
 const InputFormField = ({ field, label, type, placeholder, form }) => {
@@ -25,4 +24,4 @@ const InputFormField = ({ field, label, type, placeholder, form }) => {
   )
 }
 
-export default memo(InputFormField);
+export default InputFormField;
