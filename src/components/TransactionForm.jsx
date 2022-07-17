@@ -4,11 +4,11 @@ import * as Yup from 'yup';
 import style from 'styles/TransactionForm.module.scss';
 import InputFormField from 'components/InputFormField';
 import DateFormField from 'components/DateFormField';
-import { add as addExpense } from 'redux/features/expensesSlice';
+import { add as addExpense, update as updateExpense } from 'redux/features/expensesSlice';
 import SwitchFormField from 'components/SwitchFormField';
 import { useModal } from 'contexts/ModalContext';
 
-const TransactionForm = ({ heading, formInitialValues }) => {
+const TransactionForm = ({ id, heading, formInitialValues }) => {
 
   const dispatch = useDispatch();
   const showModal = useModal();
@@ -21,13 +21,17 @@ const TransactionForm = ({ heading, formInitialValues }) => {
   });
 
   const onFormSubmitHandler = ({ title, type, amount, date }, { resetForm }) => {
-    dispatch(addExpense({
-      id: Date.now(),
+    const formData = {
+      id: id ? id : Date.now(),
       title,
       type,
       amount: +amount,
-      date: date.format('YYYY-MM-DD')
-    }));
+      date: date.format('YYYY-MM-DD'),
+      prevAmount: formInitialValues.amount,
+      prevType: formInitialValues.type
+    }
+
+    dispatch(id ? updateExpense(formData) : addExpense(formData));
 
     resetForm();
     showModal(false);

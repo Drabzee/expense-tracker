@@ -19,6 +19,7 @@ const ExpenseTile = ({ id, title, amount, type, date }) => {
   const onEditHandler = () => {
     showModal(
       <TransactionForm
+        id={id}
         heading='Edit transaction'
         formInitialValues={{
           title: title,
