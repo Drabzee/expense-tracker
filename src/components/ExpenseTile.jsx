@@ -5,8 +5,9 @@ import { remove as removeExpense } from 'redux/features/expensesSlice';
 import { useModal } from 'contexts/ModalContext';
 import TransactionForm from './TransactionForm';
 import { getCommaFormattedAmount } from 'utils';
+import moment from 'moment';
 
-const ExpenseTile = ({ id, title, amount, type }) => {
+const ExpenseTile = ({ id, title, amount, type, date }) => {
 
   const dispatch = useDispatch();
   const showModal = useModal();
@@ -15,13 +16,26 @@ const ExpenseTile = ({ id, title, amount, type }) => {
     dispatch(removeExpense({id, amount, type}));
   }
 
+  const onEditHandler = () => {
+    showModal(
+      <TransactionForm
+        heading='Edit transaction'
+        formInitialValues={{
+          title: title,
+          amount: amount,
+          type: type,
+          date: moment(date, 'YYYY-MM-DD')
+        }}/>
+    );
+  }
+
   return (
     <div className={`
       ${style.expenseTile}
       ${type === 'income' ? style.positive : style.negative}
     `}>
       <span className={style.deleteCta} onClick={onDeleteHandler}><RiDeleteBin5Fill /></span>
-      <div className={style.content} onClick={() => showModal(<TransactionForm />)}>
+      <div className={style.content} onClick={onEditHandler}>
         <span className={style.title}>{ title }</span>
         <span className={style.amount}>₹ {getCommaFormattedAmount(amount)}</span>
       </div>

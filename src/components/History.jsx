@@ -12,10 +12,7 @@ const History = () => {
         { expenses.length ? expenses.map(expense => (    
             <ExpenseTile
               key={expense.id}
-              id={expense.id}
-              title={expense.title}
-              amount={expense.amount}
-              type={expense.type} />
+              {...expense} />
         )) : <span className={style.emptyCaption}>No expense spared today!</span> }
     </div>
   )

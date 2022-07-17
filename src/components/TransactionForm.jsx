@@ -6,16 +6,13 @@ import InputFormField from 'components/InputFormField';
 import DateFormField from 'components/DateFormField';
 import { add as addExpense } from 'redux/features/expensesSlice';
 import SwitchFormField from 'components/SwitchFormField';
+import { useModal } from 'contexts/ModalContext';
 
-const TransactionForm = () => {
+const TransactionForm = ({ heading, formInitialValues }) => {
 
   const dispatch = useDispatch();
-  const formInitialValues = {
-    title: '',
-    amount: '',
-    type: 'expense',
-    date: ''
-  }
+  const showModal = useModal();
+
   const validationSchema = Yup.object({
     title: Yup.string().min(5, 'Title should have minimum 5 characters').required('Title is required'),
     amount: Yup.number().min(1, 'Amount should be greater than 0').required('Amount is required'),
@@ -29,15 +26,16 @@ const TransactionForm = () => {
       title,
       type,
       amount: +amount,
-      date: date.toString()
+      date: date.format('YYYY-MM-DD')
     }));
 
     resetForm();
+    showModal(false);
   }
 
   return (
     <div className={style.container}>
-      <h3>Add new transaction</h3>
+      <h3>{ heading }</h3>
       <Formik initialValues={formInitialValues} onSubmit={onFormSubmitHandler} validationSchema={validationSchema}>
         <Form>
           <FastField
@@ -62,7 +60,10 @@ const TransactionForm = () => {
             label='Date of transaction'
             component={DateFormField}
             placeholder='Select date of transaction' />
-          <button type='submit'>Add transaction</button>
+          <div className={style.buttonContainer}>
+            <button type='button' className={style.secondary} onClick={() => showModal(false)}>Cancel</button>
+            <button type='submit' className={style.primary}>Submit</button>
+          </div>
         </Form>
       </Formik>
     </div>

@@ -15,7 +15,9 @@ const DateFormField = ({ label, placeholder, ...props }) => {
     setFieldValue,
     setFieldTouched
   } = form;
-
+  
+  console.log(date);
+  
   const toDisplayError = isTouched && errorMsg;
 
   const getDatePickerUI = () => {
