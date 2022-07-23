@@ -1,9 +1,15 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useEffect } from 'react';
 import style from 'styles/Modal.module.scss';
 
 const Modal = ({ showModal, children }) => {
 
   const modalRef = useRef();
+
+  useEffect(() => {
+    const hideModal = () => showModal(false);
+    document.addEventListener('backbutton', hideModal);
+    return () => document.removeEventListener('backbutton', hideModal)
+  }, [showModal]);
 
   useLayoutEffect(() => {
     if(modalRef.current.scrollHeight > window.innerHeight) {
