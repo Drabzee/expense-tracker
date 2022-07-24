@@ -1,4 +1,12 @@
-node_modules
 
-frontend
-!frontend/build
+**/*
+
+!*.Dockerfile
+!*.dockerignore
+!.env
+!src
+
+src/frontend
+src/node_modules
+
+!src/frontend/build

@@ -21,7 +21,7 @@ const SummaryContainer = () => {
       <h4>YOUR BALANCE</h4>
       <h1>₹ {getCommaFormattedAmount(total)}</h1>
       <div className={style.block}>
-        { getSummaryBlockContent('INCOME', totalIncome) }
+        { getSummaryBlockContent('INCOMES', totalIncome) }
         { getSummaryBlockContent('EXPENSE', totalExpense) }
       </div>
     </div>

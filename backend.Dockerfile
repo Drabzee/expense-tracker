@@ -1,7 +1,7 @@
 FROM node:lts-alpine3.14
 WORKDIR /app
 RUN npm install pm2 -g
-COPY package* ./
+COPY ./src/package* ./
 RUN npm install
-COPY . .
+COPY ./src ./
 CMD ["pm2-runtime", "app.js"]

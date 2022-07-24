@@ -13,6 +13,10 @@ services:
     environment:
       PORT: 9000
       WATCHPACK_POLLING: 'true'
+    logging:
+      driver: journald
+      options:
+        tag: reverse_proxy
 
 volumes:
   node_modules:
