@@ -1,7 +1,6 @@
 import Summary from 'components/Summary';
 import History from 'components/History';
 import style from 'styles/App.module.scss';
-// import TransactionForm from 'components/TransactionForm';
 import ModalContext from 'contexts/ModalContext';
 import FloatingActionButton from 'components/FloatingActionButton';
 
@@ -13,7 +12,6 @@ function App() {
         <Summary />
         <History />
         <FloatingActionButton />
-        {/* <TransactionForm /> */}
       </div>
     </ModalContext>
   );
