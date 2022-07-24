@@ -4,4 +4,4 @@ RUN npm install pm2 -g
 COPY ./src/package* ./
 RUN npm install
 COPY ./src ./
-CMD ["pm2-runtime", "app.js"]
+CMD ["pm2-dev", "app.js"]

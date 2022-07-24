@@ -9,4 +9,11 @@ router.get('/', (req, res) => {
     });
 });
 
+router.use('*', (req, res) => {
+    res.status(404).json({
+        status: false,
+        message: 'Page not found!'
+    });
+});
+
 module.exports = router;

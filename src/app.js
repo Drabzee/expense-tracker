@@ -1,20 +1,24 @@
-const express = require('express');
 require('module-alias/register');
+const express = require('express');
+const path = require('path');
 const morgan = require('morgan');
-const mainRouter = require('@routes/main');
+const router = require('@routes');
 
 const app = express();
 
 app.use(morgan('combined'));
 
-app.use('/api/v1', mainRouter);
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'public')));
+}
 
-app.use('*', (req, res) => {
-    res.status(404).json({
-        status: false,
-        message: 'Page not found!'
+app.use('/api/v1', router);
+
+if(process.env.NODE_ENV === 'production') {
+    app.use('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
     });
-});
+}
 
 app.use((err, req, res) => {
     console.log(err.stack);

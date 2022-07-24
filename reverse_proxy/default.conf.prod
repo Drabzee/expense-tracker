@@ -5,7 +5,7 @@ server {
     server_name expense-tracker.uddeshyakumar.in;
 
     location / {
-        proxy_pass http://backend:8000
+        proxy_pass http://app:8000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;

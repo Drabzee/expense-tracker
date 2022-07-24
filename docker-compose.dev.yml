@@ -36,7 +36,6 @@ services:
     environment:
       CHOKIDAR_USEPOLLING: true
       NODE_ENV: 'development'
-    command: ["pm2-dev", "app.js"]
 
 volumes:
   frontend_node_modules:
