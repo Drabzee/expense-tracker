@@ -2,7 +2,6 @@ const express = require('express');
 require('module-alias/register');
 const morgan = require('morgan');
 const mainRouter = require('@routes/main');
-// require('asdf');
 
 const app = express();
 
