@@ -16,11 +16,12 @@ app.use('/api/v1', router);
 
 if(process.env.NODE_ENV === 'production') {
     app.use('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
     });
 }
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
+    console.log(res);
     console.log(err.stack);
     res.status(500).send({
         status: false,
