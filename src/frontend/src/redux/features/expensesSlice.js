@@ -4,15 +4,15 @@ const expenseSlice = createSlice({
     name: 'expenses',
     initialState: [],
     reducers: {
-        add: (state, { payload }) => {
-            state.push(payload);
+        add: (state, { payload: { expense } }) => {
+            state.push(expense);
         },
         remove: (state, { payload }) => {
             return state.filter(item => item.id !== payload.id)
         },
-        update: (state, { payload }) => {
+        update: (state, { payload: { expense } }) => {
             state.forEach((item, index) => {
-                if(item.id === payload.id) state[index] = payload;
+                if(item.id === expense.id) state[index] = expense;
             })
         }
     }

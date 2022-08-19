@@ -1,13 +1,9 @@
 const express = require('express');
+const expenseRouter = require('@routes/expenseRoutes');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.status(200).json({
-        status: true,
-        message: 'Hello, World'
-    });
-});
+router.use('/', expenseRouter);
 
 router.use('*', (req, res) => {
     res.status(404).json({

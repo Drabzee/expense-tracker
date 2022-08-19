@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const History = () => {
 
   const expenses = useSelector(state => state.expenses);
+  console.log(expenses);
 
   return (
     <div className={style.container}>

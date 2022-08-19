@@ -22,11 +22,13 @@ const TransactionForm = ({ id, heading, formInitialValues }) => {
 
   const onFormSubmitHandler = ({ title, type, amount, date }, { resetForm }) => {
     const formData = {
-      id: id ? id : Date.now(),
-      title,
-      type,
-      amount: +amount,
-      date: date.format('YYYY-MM-DD'),
+      expense: {
+        id: id ? id : Date.now(),
+        title,
+        type,
+        amount: +amount,
+        date: date.format('YYYY-MM-DD'),
+      },
       prevAmount: formInitialValues.amount,
       prevType: formInitialValues.type
     }

@@ -1,1 +1,3 @@
 ENVIRONMENT=development
+
+MONGODB_ADMIN_PWD=password
