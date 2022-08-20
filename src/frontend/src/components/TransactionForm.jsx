@@ -7,6 +7,8 @@ import DateFormField from 'components/DateFormField';
 import { add as addExpense, update as updateExpense } from 'redux/features/expensesSlice';
 import SwitchFormField from 'components/SwitchFormField';
 import { useModal } from 'contexts/ModalContext';
+import moment from 'moment';
+import { insertExpenseApi, updateExpenseApi } from 'apis';
 
 const TransactionForm = ({ id, heading, formInitialValues }) => {
 
@@ -20,20 +22,21 @@ const TransactionForm = ({ id, heading, formInitialValues }) => {
     type: Yup.string().oneOf(['expense', 'income']).required()
   });
 
-  const onFormSubmitHandler = ({ title, type, amount, date }, { resetForm }) => {
+  const onFormSubmitHandler = async ({ title, type, amount, date }, { resetForm }) => {
+    const expense = {title, type, amount: +amount, date: date.toDate()};
+    const { data: { data } } = await (id ? updateExpenseApi(id, expense) : insertExpenseApi(expense));
+
     const formData = {
-      expense: {
-        id: id ? id : Date.now(),
-        title,
-        type,
-        amount: +amount,
-        date: date.format('YYYY-MM-DD'),
-      },
+      expense: data,
       prevAmount: formInitialValues.amount,
       prevType: formInitialValues.type
     }
 
-    dispatch(id ? updateExpense(formData) : addExpense(formData));
+    if(id) {
+      dispatch(updateExpense(formData));
+    } else if(moment(0, 'HH').isSame(date)) {
+      dispatch(addExpense(formData));
+    }
 
     resetForm();
     showModal(false);

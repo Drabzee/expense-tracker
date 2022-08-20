@@ -6,7 +6,7 @@ import style from 'styles/App.module.scss';
 import ModalContext from 'contexts/ModalContext';
 import FloatingActionButton from 'components/FloatingActionButton';
 import { initializeState } from 'redux/actions';
-import { fetchInitialState } from 'apis';
+import { fetchInitialStateApi } from 'apis';
 import 'nprogress/nprogress.css';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const { data: { data } } = await fetchInitialState();
+      const { data: { data } } = await fetchInitialStateApi();
       dispatch(initializeState(data));
     })();
   }, [dispatch]);

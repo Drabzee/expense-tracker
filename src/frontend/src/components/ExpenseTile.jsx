@@ -6,13 +6,15 @@ import { useModal } from 'contexts/ModalContext';
 import TransactionForm from './TransactionForm';
 import { getCommaFormattedAmount } from 'utils/helpers';
 import moment from 'moment';
+import { deleteExpenseApi } from 'apis';
 
 const ExpenseTile = ({ id, title, amount, type, date }) => {
 
   const dispatch = useDispatch();
   const showModal = useModal();
 
-  const onDeleteHandler = () => {
+  const onDeleteHandler = async () => {
+    await deleteExpenseApi(id);
     dispatch(removeExpense({id, amount, type}));
   }
 

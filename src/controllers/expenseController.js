@@ -47,6 +47,7 @@ module.exports.insertExpense = async (req, res, next) => {
         const { title, amount, date, type } = req.body;
         const newExpense = new Expense({title, amount, date: new Date(date), type});
         await newExpense.save();
+
         res.status(200).json({
             status: true,
             data: newExpense
@@ -65,7 +66,7 @@ module.exports.updateExpense = async (req, res, next) => {
         }
         
         const { title, amount, type, date } = req.body;
-        const updatedExpense = await Expense.findByIdAndUpdate(id, { title, amount, type, date });
+        const updatedExpense = await Expense.findByIdAndUpdate(id, { title, amount, type, date }, { new: true });
 
         if(!updatedExpense) {
             return res.status(404).json({
