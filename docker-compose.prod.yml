@@ -10,10 +10,22 @@ services:
       - 8080:8000
     environment:
       NODE_ENV: 'production'
-    logging:
-      driver: journald
-      options:
-        tag: reverse_proxy
+    env_file: .env
+    # logging:
+    #   driver: journald
+    #   options:
+    #     tag: reverse_proxy
+
+  mongodb:
+    image: mongo:4.4
+    volumes:
+      - data:/data/db
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ADMIN_PWD}
 
 volumes:
-  node_modules:
+  data:

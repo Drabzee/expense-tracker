@@ -4,7 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const router = require('@routes');
 const mongoose = require('mongoose');
-require('dotenv').config();
+// require('dotenv').config();
 
 const app = express();
 
