@@ -58,22 +58,20 @@ module.exports.updateExpense = async (req, res, next) => {
     try {
         const id = req.params.id;
         if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 message: 'Not a valid ID'
             });
-            return;
         }
         
         const { title, amount, type, date } = req.body;
         const updatedExpense = await Expense.findByIdAndUpdate(id, { title, amount, type, date });
 
         if(!updatedExpense) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 message: 'Expense not found for given ID'
             });
-            return;
         }
 
         res.status(200).json({
@@ -88,21 +86,19 @@ module.exports.deleteExpense = async (req, res, next) => {
     try {
         const id = req.params.id;
         if(!id.match(/^[0-9a-fA-F]{24}$/)) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 message: 'Not a valid ID'
             });
-            return;
         }
         
         const deletedExpense = await Expense.findByIdAndDelete(id);
 
         if(!deletedExpense) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 message: 'Expense not found for given ID'
             });
-            return;
         }
         res.status(200).json({
             status: true,

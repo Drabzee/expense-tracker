@@ -4,7 +4,7 @@ import style from 'styles/ExpenseTile.module.scss';
 import { remove as removeExpense } from 'redux/features/expensesSlice';
 import { useModal } from 'contexts/ModalContext';
 import TransactionForm from './TransactionForm';
-import { getCommaFormattedAmount } from 'utils';
+import { getCommaFormattedAmount } from 'utils/helpers';
 import moment from 'moment';
 
 const ExpenseTile = ({ id, title, amount, type, date }) => {

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import style from 'styles/Summary.module.scss';
-import { getCommaFormattedAmount } from 'utils';
+import { getCommaFormattedAmount } from 'utils/helpers';
 
 const SummaryContainer = () => {
 

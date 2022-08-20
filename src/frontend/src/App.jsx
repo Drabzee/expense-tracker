@@ -6,7 +6,8 @@ import style from 'styles/App.module.scss';
 import ModalContext from 'contexts/ModalContext';
 import FloatingActionButton from 'components/FloatingActionButton';
 import { initializeState } from 'redux/actions';
-import { fetchInitialState } from 'apis/expense';
+import { fetchInitialState } from 'apis';
+import 'nprogress/nprogress.css';
 
 function App() {
 
