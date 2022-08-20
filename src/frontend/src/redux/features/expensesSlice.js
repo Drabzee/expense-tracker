@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { initializeState } from 'redux/actions';
 
 const expenseSlice = createSlice({
     name: 'expenses',
@@ -15,6 +16,11 @@ const expenseSlice = createSlice({
                 if(item.id === expense.id) state[index] = expense;
             })
         }
+    },
+    extraReducers: builder => {
+        builder.addCase(initializeState.toString(), (state, { payload }) => {
+            state.push(...payload.expenses);
+        });
     }
 });
 

@@ -1,4 +1,33 @@
-const Expense = require("@models/Expense")
+const Expense = require("@models/Expense");
+
+module.exports.expenseInitialState = async (req, res, next) => {
+    try {
+        const expenses = await Expense.find();
+        
+        const summary = (await Expense.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalIncome: {
+                        $sum: {
+                            $cond: [ { $eq: [ '$type', 'income' ] }, '$amount', 0 ]
+                        }
+                    },
+                    totalExpense: {
+                        $sum: {
+                            $cond: [ { $eq: [ '$type', 'expense' ] }, '$amount', 0 ]
+                        }
+                    }
+                }
+            }
+        ]))[0];
+
+        res.status(200).json({
+            status: true,
+            data: { expenses, summary }
+        });
+    } catch(err) { next(err); }
+}
 
 module.exports.fetchAllExpenses = async (req, res, next) => {
     try {
@@ -33,9 +62,10 @@ module.exports.updateExpense = async (req, res, next) => {
             return;
         }
         
-        const expense = await Expense.findById(id);
+        const { title, amount, type, date } = req.body;
+        const updatedExpense = await Expense.findByIdAndUpdate(id, { title, amount, type, date });
 
-        if(!expense) {
+        if(!updatedExpense) {
             res.status(404).json({
                 status: false,
                 message: 'Expense not found for given ID'
@@ -43,18 +73,9 @@ module.exports.updateExpense = async (req, res, next) => {
             return;
         }
 
-        const { title, amount, type, date } = req.body;
-        
-        expense.title = title;
-        expense.amount = amount;
-        expense.type = type;
-        expense.date = date;
-
-        await expense.save();
-
         res.status(200).json({
             status: true,
-            data: expense
+            data: updatedExpense
         });
 
     } catch(err) { next(err); }
