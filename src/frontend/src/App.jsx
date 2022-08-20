@@ -17,7 +17,7 @@ function App() {
       const { data: { data } } = await fetchInitialState();
       dispatch(initializeState(data));
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <ModalContext>

@@ -11,7 +11,7 @@ const History = () => {
         <h3>Today's History</h3>
         { expenses.length ? expenses.map(expense => (    
             <ExpenseTile
-              key={expense._id}
+              key={expense.id}
               {...expense} />
         )) : <span className={style.emptyCaption}>No expense spared today!</span> }
     </div>

@@ -4,7 +4,7 @@ module.exports.expenseInitialState = async (req, res, next) => {
     try {
         const expenses = await Expense.find();
         
-        const summary = (await Expense.aggregate([
+        const { totalIncome, totalExpense } = (await Expense.aggregate([
             {
                 $group: {
                     _id: null,
@@ -24,7 +24,10 @@ module.exports.expenseInitialState = async (req, res, next) => {
 
         res.status(200).json({
             status: true,
-            data: { expenses, summary }
+            data: {
+                expenses,
+                summary: { totalExpense, totalIncome }
+            }
         });
     } catch(err) { next(err); }
 }

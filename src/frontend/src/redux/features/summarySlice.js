@@ -35,7 +35,6 @@ const summarySlice = createSlice({
             else state.totalExpense += newAmount;
         });
         builder.addCase(initializeState.toString(), (state, { payload }) => {
-            console.log(payload);
             state.totalIncome = payload.summary.totalIncome;
             state.totalExpense = payload.summary.totalExpense;
         });

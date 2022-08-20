@@ -20,6 +20,16 @@ const expenseSchema = Schema({
     }
 }, { timestamps: true });
 
+expenseSchema.set('toJSON', {
+    transform: (doc, {_id, ...result}) => {
+        return {
+            id: _id,
+            ...result,
+        };
+    }
+});
+
 const Expense = model('Expense', expenseSchema);
+
 
 module.exports = Expense;
