@@ -4,7 +4,7 @@ module.exports.expenseInitialState = async (req, res, next) => {
     try {
         const expenses = await Expense.find();
         
-        const { totalIncome, totalExpense } = (await Expense.aggregate([
+        const aggregatedData = (await Expense.aggregate([
             {
                 $group: {
                     _id: null,
@@ -21,6 +21,8 @@ module.exports.expenseInitialState = async (req, res, next) => {
                 }
             }
         ]))[0];
+
+        const { totalExpense, totalIncome } = aggregatedData ? aggregatedData : { totalExpense: 0, totalIncome: 0 };
 
         res.status(200).json({
             status: true,
